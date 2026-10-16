@@ -1,4 +1,4 @@
-# omplab
+# ompthebestthing
 
 A tiny CLI that ships nine OpenMP / MPI lab programs and lets you view or save them anywhere you have Node.js.
 
@@ -7,17 +7,17 @@ A tiny CLI that ships nine OpenMP / MPI lab programs and lets you view or save t
 No install needed:
 
 ```sh
-npx @dinaltium/omplab list               # list all programs
-npx @dinaltium/omplab show 3             # print prg3.c to the terminal
-npx @dinaltium/omplab get prg1 prg5      # save prg1.c and prg5.c in the current directory
-npx @dinaltium/omplab get all -d lab     # save all programs into ./lab
+npx ompthebestthing list               # list all programs
+npx ompthebestthing show 3             # print prg3.c to the terminal
+npx ompthebestthing get prg1 prg5      # save prg1.c and prg5.c in the current directory
+npx ompthebestthing get all -d lab     # save all programs into ./lab
 ```
 
 Or install it globally once and drop the `npx`:
 
 ```sh
-npm install -g @dinaltium/omplab
-omplab get all
+npm install -g ompthebestthing
+ompthebestthing get all
 ```
 
 Running straight from GitHub (no npm publish needed):
@@ -43,12 +43,12 @@ npx github:ara-aras/npm_test list
 ## Adding a program
 
 1. Drop the `.c` file into `programs/`.
-2. Add an entry for it in the `CATALOG` object in `bin/omplab.js`.
-3. Bump `version` in `package.json` and run `npm publish --access public`.
+2. Add an entry for it in the `CATALOG` object in `bin/ompthebestthing.js`.
+3. Bump `version` in `package.json` and run `npm publish`.
 
 ## Publishing
 
 ```sh
 npm login
-npm publish --access public
+npm publish
 ```

@@ -35,13 +35,13 @@ function normalize(arg) {
 }
 
 function resolveNames(args) {
-  if (args.length === 0) die('Specify which program(s), e.g. "omplab get prg1" or "omplab get all".');
+  if (args.length === 0) die('Specify which program(s), e.g. "ompthebestthing get prg1" or "ompthebestthing get all".');
   if (args.some((a) => a.toLowerCase() === 'all')) return Object.keys(CATALOG);
-  return args.map((a) => normalize(a) || die(`Unknown program "${a}". Run "omplab list" to see what exists.`));
+  return args.map((a) => normalize(a) || die(`Unknown program "${a}". Run "ompthebestthing list" to see what exists.`));
 }
 
 function die(msg) {
-  console.error(`omplab: ${msg}`);
+  console.error(`ompthebestthing: ${msg}`);
   process.exit(1);
 }
 
@@ -50,7 +50,7 @@ function list() {
   for (const [name, p] of Object.entries(CATALOG)) {
     console.log(`  ${name.padEnd(5)} [${p.kind.toUpperCase().padEnd(3)}]  ${p.title}`);
   }
-  console.log('\nUse "omplab show <name>" to view code, "omplab get <name>" to save it.');
+  console.log('\nUse "ompthebestthing show <name>" to view code, "ompthebestthing get <name>" to save it.');
 }
 
 function show(args) {
@@ -90,22 +90,22 @@ function get(args) {
 }
 
 function help() {
-  console.log(`omplab — OpenMP / MPI lab programs
+  console.log(`ompthebestthing — OpenMP / MPI lab programs
 
 Usage:
-  omplab list                      List all programs
-  omplab show <name...|all>        Print program source to the terminal
-  omplab get  <name...|all>        Save program(s) as .c files in the current directory
-        -d, --dir <path>           Save into <path> instead
-        -f, --force                Overwrite existing files
+  ompthebestthing list               List all programs
+  ompthebestthing show <name...|all> Print program source to the terminal
+  ompthebestthing get  <name...|all> Save program(s) as .c files in the current directory
+        -d, --dir <path>    Save into <path> instead
+        -f, --force         Overwrite existing files
 
 Names can be written as prg1, prg1.c or just 1.
 
 Examples:
-  npx @dinaltium/omplab list
-  npx @dinaltium/omplab show 3
-  npx @dinaltium/omplab get prg1 prg5
-  npx @dinaltium/omplab get all -d lab`);
+  npx ompthebestthing list
+  npx ompthebestthing show 3
+  npx ompthebestthing get prg1 prg5
+  npx ompthebestthing get all -d lab`);
 }
 
 const [cmd, ...args] = process.argv.slice(2);
@@ -130,7 +130,7 @@ switch (cmd) {
     help();
     break;
   default:
-    // Allow "omplab prg3" as a shortcut for "omplab show prg3".
+    // Allow "ompthebestthing prg3" as a shortcut for "ompthebestthing show prg3".
     if (normalize(cmd)) show([cmd, ...args]);
-    else die(`Unknown command "${cmd}". Run "omplab help".`);
+    else die(`Unknown command "${cmd}". Run "ompthebestthing help".`);
 }

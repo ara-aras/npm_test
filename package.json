@@ -1,9 +1,9 @@
 {
-  "name": "@dinaltium/omplab",
+  "name": "ompthebestthing",
   "version": "1.0.0",
   "description": "CLI to view and download OpenMP and MPI lab programs (C source files)",
   "bin": {
-    "omplab": "bin/omplab.js"
+    "ompthebestthing": "bin/ompthebestthing.js"
   },
   "files": [
     "bin",
