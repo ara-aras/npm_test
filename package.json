@@ -1,0 +1,26 @@
+{
+  "name": "omplab",
+  "version": "1.0.0",
+  "description": "CLI to view and download OpenMP and MPI lab programs (C source files)",
+  "bin": {
+    "omplab": "bin/omplab.js"
+  },
+  "files": [
+    "bin",
+    "programs"
+  ],
+  "keywords": [
+    "openmp",
+    "mpi",
+    "c",
+    "lab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ara-aras/npm_test.git"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "MIT"
+}
