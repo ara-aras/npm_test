@@ -6,26 +6,54 @@ const path = require('path');
 
 const PROGRAMS_DIR = path.join(__dirname, '..', 'programs');
 
-// Short description and compile/run hint for each program.
+// Short description plus the exact compile and run commands for each program.
 const CATALOG = {
-  prg1: { title: 'OpenMP: sequential vs parallel merge sort', kind: 'omp' },
-  prg2: { title: 'OpenMP: static schedule(static,2) iteration split per thread', kind: 'omp', interactive: true },
-  prg3: { title: 'OpenMP: Fibonacci with tasks', kind: 'omp', interactive: true },
-  prg4: { title: 'OpenMP: primes from 1..n, serial vs parallel timing', kind: 'omp', interactive: true, libm: true },
-  prg5: { title: 'MPI: point-to-point Send/Recv between rank 0 and 1', kind: 'mpi', np: 2 },
-  prg6: { title: 'MPI: deadlock (DEADLOCK_PART 1) and avoidance (DEADLOCK_PART 2)', kind: 'mpi', np: 2 },
-  prg7: { title: 'MPI: Bcast from rank 0', kind: 'mpi', np: 4 },
-  prg8: { title: 'MPI: Scatter + Gather', kind: 'mpi', np: 4 },
-  prg9: { title: 'MPI: Reduce and Allreduce (sum/prod/max/min)', kind: 'mpi', np: 4 },
+  prg1: {
+    title: 'OpenMP: sequential vs parallel merge sort',
+    compile: 'gcc -fopenmp prg1.c -o prg1',
+    run: 'export OMP_NUM_THREADS=4 && ./prg1',
+  },
+  prg2: {
+    title: 'OpenMP: static schedule(static,2) iteration split per thread',
+    compile: 'gcc -fopenmp prg2.c -o prg2',
+    run: 'export OMP_NUM_THREADS=4 && ./prg2',
+  },
+  prg3: {
+    title: 'OpenMP: Fibonacci with tasks',
+    compile: 'gcc -fopenmp prg3.c -o prg3',
+    run: 'export OMP_NUM_THREADS=4 && ./prg3',
+  },
+  prg4: {
+    title: 'OpenMP: primes from 1..n, serial vs parallel timing',
+    compile: 'gcc -fopenmp prg4.c -o prg4 -lm',
+    run: 'export OMP_NUM_THREADS=4 && ./prg4',
+  },
+  prg5: {
+    title: 'MPI: point-to-point Send/Recv between rank 0 and 1',
+    compile: 'mpicc prg5.c -o prg5',
+    run: 'mpirun -np 2 ./prg5',
+  },
+  prg6: {
+    title: 'MPI: deadlock (DEADLOCK_PART 1) and avoidance (DEADLOCK_PART 2)',
+    compile: 'mpicc prg6.c -o prg6',
+    run: 'mpirun -np 2 ./prg6',
+  },
+  prg7: {
+    title: 'MPI: Bcast from rank 0',
+    compile: 'mpicc prg7.c -o prg7',
+    run: 'mpirun -np 4 ./prg7',
+  },
+  prg8: {
+    title: 'MPI: Scatter + Gather',
+    compile: 'mpicc prg8.c -o prg8',
+    run: 'mpirun -np 4 ./prg8',
+  },
+  prg9: {
+    title: 'MPI: Reduce and Allreduce (sum/prod/max/min)',
+    compile: 'mpicc prg9.c -o prg9',
+    run: 'mpirun -np 4 ./prg9',
+  },
 };
-
-function buildHint(name) {
-  const p = CATALOG[name];
-  if (p.kind === 'omp') {
-    return `gcc -fopenmp ${name}.c -o ${name}${p.libm ? ' -lm' : ''} && ./${name}`;
-  }
-  return `mpicc ${name}.c -o ${name} && mpirun -np ${p.np} ./${name}`;
-}
 
 function normalize(arg) {
   const name = String(arg).toLowerCase().replace(/\.c$/, '');
@@ -48,7 +76,7 @@ function die(msg) {
 function list() {
   console.log('Available programs:\n');
   for (const [name, p] of Object.entries(CATALOG)) {
-    console.log(`  ${name.padEnd(5)} [${p.kind.toUpperCase().padEnd(3)}]  ${p.title}`);
+    console.log(`  ${name.padEnd(5)} ${p.title}`);
   }
   console.log('\nUse "ompthebestthing show <name>" to view code, "ompthebestthing get <name>" to save it.');
 }
@@ -57,7 +85,8 @@ function show(args) {
   for (const name of resolveNames(args)) {
     const src = fs.readFileSync(path.join(PROGRAMS_DIR, `${name}.c`), 'utf8');
     console.log(`// ===== ${name}.c — ${CATALOG[name].title} =====`);
-    console.log(`// Build & run: ${buildHint(name)}\n`);
+    console.log(`// Compile: ${CATALOG[name].compile}`);
+    console.log(`// Run:     ${CATALOG[name].run}\n`);
     process.stdout.write(src);
     console.log('');
   }
@@ -85,7 +114,8 @@ function get(args) {
     }
     fs.copyFileSync(path.join(PROGRAMS_DIR, `${name}.c`), dest);
     console.log(`  saved  ${dest}`);
-    console.log(`         build: ${buildHint(name)}`);
+    console.log(`         compile: ${CATALOG[name].compile}`);
+    console.log(`         run:     ${CATALOG[name].run}`);
   }
 }
 

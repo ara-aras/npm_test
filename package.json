@@ -1,6 +1,6 @@
 {
   "name": "ompthebestthing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI to view and download OpenMP and MPI lab programs (C source files)",
   "bin": {
     "ompthebestthing": "bin/ompthebestthing.js"
