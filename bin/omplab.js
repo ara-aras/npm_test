@@ -102,10 +102,10 @@ Usage:
 Names can be written as prg1, prg1.c or just 1.
 
 Examples:
-  npx omplab list
-  npx omplab show 3
-  npx omplab get prg1 prg5
-  npx omplab get all -d lab`);
+  npx @dinaltium/omplab list
+  npx @dinaltium/omplab show 3
+  npx @dinaltium/omplab get prg1 prg5
+  npx @dinaltium/omplab get all -d lab`);
 }
 
 const [cmd, ...args] = process.argv.slice(2);

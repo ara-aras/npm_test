@@ -7,16 +7,16 @@ A tiny CLI that ships nine OpenMP / MPI lab programs and lets you view or save t
 No install needed:
 
 ```sh
-npx omplab list               # list all programs
-npx omplab show 3             # print prg3.c to the terminal
-npx omplab get prg1 prg5      # save prg1.c and prg5.c in the current directory
-npx omplab get all -d lab     # save all programs into ./lab
+npx @dinaltium/omplab list               # list all programs
+npx @dinaltium/omplab show 3             # print prg3.c to the terminal
+npx @dinaltium/omplab get prg1 prg5      # save prg1.c and prg5.c in the current directory
+npx @dinaltium/omplab get all -d lab     # save all programs into ./lab
 ```
 
 Or install it globally once and drop the `npx`:
 
 ```sh
-npm install -g omplab
+npm install -g @dinaltium/omplab
 omplab get all
 ```
 
@@ -44,11 +44,11 @@ npx github:ara-aras/npm_test list
 
 1. Drop the `.c` file into `programs/`.
 2. Add an entry for it in the `CATALOG` object in `bin/omplab.js`.
-3. Bump `version` in `package.json` and run `npm publish`.
+3. Bump `version` in `package.json` and run `npm publish --access public`.
 
 ## Publishing
 
 ```sh
 npm login
-npm publish
+npm publish --access public
 ```

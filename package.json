@@ -1,5 +1,5 @@
 {
-  "name": "omplab",
+  "name": "@dinaltium/omplab",
   "version": "1.0.0",
   "description": "CLI to view and download OpenMP and MPI lab programs (C source files)",
   "bin": {
